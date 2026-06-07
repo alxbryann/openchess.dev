@@ -19,18 +19,22 @@ export function AuthButton() {
   const { user, loading } = useUser();
 
   if (loading) {
-    return <div className="h-9 w-28 rounded-md bg-secondary/40 animate-pulse" />;
+    return (
+      <div className="h-9 w-9 sm:w-28 rounded-[var(--radius-md)] bg-surface-sunk animate-pulse shrink-0" />
+    );
   }
 
   if (!user) {
     return (
       <Button
-        variant="outline"
-        className="gap-2 h-9 text-sm"
+        variant="ghost"
+        size="sm"
+        className="gap-2 text-ink-700 max-sm:px-2.5 max-sm:min-w-9"
         onClick={() => signInWithGoogle()}
+        aria-label="Entrar con Google"
       >
         <GoogleGlyph />
-        Entrar con Google
+        <span className="oc-auth-label max-sm:sr-only">Entrar con Google</span>
       </Button>
     );
   }
@@ -48,20 +52,20 @@ export function AuthButton() {
         <img
           src={avatar}
           alt={name}
-          className="h-8 w-8 rounded-full border border-border"
+          className="h-8 w-8 rounded-full border border-line"
         />
       ) : (
-        <div className="h-8 w-8 rounded-full border border-border bg-secondary flex items-center justify-center text-xs font-bold">
+        <div className="h-8 w-8 rounded-full border border-line bg-brand-tint flex items-center justify-center text-xs font-bold text-brand-text">
           {name.slice(0, 1).toUpperCase()}
         </div>
       )}
-      <span className="text-sm text-muted-foreground hidden sm:block max-w-[10rem] truncate">
+      <span className="text-sm text-ink-500 hidden sm:block max-w-[10rem] truncate">
         {name}
       </span>
       <Button
         variant="ghost"
-        size="icon"
-        className="h-8 w-8 text-muted-foreground hover:text-foreground"
+        size="icon-sm"
+        className="text-ink-500 hover:text-ink-900"
         onClick={() => signOut()}
         title="Cerrar sesión"
       >

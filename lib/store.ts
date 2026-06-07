@@ -108,8 +108,8 @@ interface TournamentStore {
     timeControl: string;
     system: PairingSystem;
     totalRounds: number;
-  }) => Tournament;
-  deleteTournament: (id: string) => void;
+  }) => Promise<Tournament>;
+  deleteTournament: (id: string) => Promise<boolean>;
   addPlayer: (tournamentId: string, data: { name: string; rating: number }) => void;
   removePlayer: (tournamentId: string, playerId: string) => void;
   generateNextRound: (tournamentId: string) => void;
@@ -120,12 +120,19 @@ interface TournamentStore {
 
 export const useTournamentStore = create<TournamentStore>()((set, get) => {
   // Merge a tournament into the in-memory cache (used by loaders, realtime, mutations).
+  // Keep locally-known players when a fetch/realtime snapshot arrives slightly stale
+  // (common right after self-registration on mobile).
   function mergeLocal(t: Tournament) {
     set(state => {
       const idx = state.tournaments.findIndex(x => x.id === t.id);
       if (idx === -1) return { tournaments: [...state.tournaments, t] };
+
+      const existing = state.tournaments[idx];
+      const byId = new Map(existing.players.map(p => [p.id, p]));
+      for (const p of t.players) byId.set(p.id, p);
+
       const next = [...state.tournaments];
-      next[idx] = t;
+      next[idx] = { ...t, players: [...byId.values()] };
       return { tournaments: next };
     });
   }
@@ -226,7 +233,7 @@ export const useTournamentStore = create<TournamentStore>()((set, get) => {
       };
     },
 
-    createTournament: (data) => {
+    createTournament: async (data) => {
       const tournament: Tournament = {
         id: crypto.randomUUID(),
         ...data,
@@ -239,32 +246,56 @@ export const useTournamentStore = create<TournamentStore>()((set, get) => {
       mergeLocal(tournament);
       rememberTournamentId(tournament.id);
 
-      // Insert with owner_id if signed in (set asynchronously).
-      void (async () => {
-        const { data: userData } = await supabase.auth.getUser();
-        const { error } = await supabase.from('tournaments').insert({
-          id: tournament.id,
-          share_code: tournament.shareCode,
-          owner_id: userData.user?.id ?? null,
-          name: tournament.name,
-          location: tournament.location,
-          date: tournament.date,
-          time_control: tournament.timeControl,
-          system: tournament.system,
-          total_rounds: tournament.totalRounds,
-          status: tournament.status,
-          data: { players: [], rounds: [] } as unknown as Json,
-        });
-        if (error) console.error('createTournament failed:', error.message);
-      })();
+      const { data: userData } = await supabase.auth.getUser();
+      const ownerId = userData.user?.id ?? null;
+
+      const { error } = await supabase.from('tournaments').insert({
+        id: tournament.id,
+        share_code: tournament.shareCode,
+        owner_id: ownerId,
+        name: tournament.name,
+        location: tournament.location,
+        date: tournament.date,
+        time_control: tournament.timeControl,
+        system: tournament.system,
+        total_rounds: tournament.totalRounds,
+        status: tournament.status,
+        data: { players: [], rounds: [] } as unknown as Json,
+      });
+      if (error) console.error('createTournament failed:', error.message);
 
       return tournament;
     },
 
-    deleteTournament: (id) => {
+    deleteTournament: async (id) => {
+      const { data: userData } = await supabase.auth.getUser();
+      const uid = userData.user?.id;
+
+      // Attach owner to anonymous rows so authenticated creators can delete them.
+      if (uid) {
+        await supabase
+          .from('tournaments')
+          .update({ owner_id: uid })
+          .eq('id', id)
+          .is('owner_id', null);
+      }
+
+      const { error, count } = await supabase
+        .from('tournaments')
+        .delete({ count: 'exact' })
+        .eq('id', id);
+
+      if (error || !count) {
+        console.error(
+          'deleteTournament failed:',
+          error?.message ?? 'no rows deleted (check RLS / owner_id)'
+        );
+        return false;
+      }
+
       set(state => ({ tournaments: state.tournaments.filter(t => t.id !== id) }));
       forgetTournamentId(id);
-      void supabase.from('tournaments').delete().eq('id', id);
+      return true;
     },
 
     addPlayer: (tournamentId, data) => {

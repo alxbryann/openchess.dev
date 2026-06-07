@@ -86,9 +86,9 @@ export function RoundManager({ tournament }: { tournament: Tournament }) {
             <div className="flex items-center gap-2.5">
               {currentRound.status === "active" ? (
                 <>
-                  <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse shrink-0" />
+                  <span className="w-2 h-2 rounded-full animate-pulse shrink-0" style={{ background: "var(--green-500)" }} />
                   <span className="font-display font-semibold">Ronda {currentRound.number}</span>
-                  <span className="text-xs text-green-400">En juego</span>
+                  <span className="text-xs" style={{ color: "var(--green-600)" }}>En juego</span>
                 </>
               ) : (
                 <>
@@ -122,7 +122,7 @@ export function RoundManager({ tournament }: { tournament: Tournament }) {
                     toast.success(`Ronda ${currentRound.number} cerrada`);
                   }}
                 >
-                  <CheckCircle2 className="h-3 w-3 text-green-400" />
+                  <CheckCircle2 className="h-3 w-3" style={{ color: "var(--green-500)" }} />
                   Cerrar ronda
                 </Button>
               )}
@@ -139,31 +139,31 @@ export function RoundManager({ tournament }: { tournament: Tournament }) {
               const blackWins = pairing.result === "0-1";
 
               return (
-                <div key={pairing.id} className="flex items-center gap-3 px-4 py-3.5">
+                <div key={pairing.id} className="flex items-center gap-1.5 sm:gap-3 px-2 sm:px-4 py-3">
                   {/* Board # */}
-                  <div className="w-7 text-center font-mono text-xs font-bold text-muted-foreground/40 shrink-0">
+                  <div className="hidden sm:block w-7 text-center font-mono text-xs font-bold text-muted-foreground/40 shrink-0">
                     {pairing.board}
                   </div>
 
                   {/* White player */}
-                  <div className="flex-1 flex items-center justify-end gap-2.5 min-w-0">
+                  <div className="flex-1 flex items-center justify-end gap-1 sm:gap-2.5 min-w-0">
                     <div className="text-right min-w-0">
                       <div className={`text-sm font-medium truncate ${whiteWins ? "text-primary" : ""}`}>
                         {white?.name ?? "?"}
                       </div>
-                      <div className="text-xs text-muted-foreground font-mono">
+                      <div className="hidden sm:block text-xs text-muted-foreground font-mono">
                         {white?.rating} · {white?.score}p
                       </div>
                     </div>
-                    <div className="w-7 h-7 rounded-full bg-amber-50 border-2 border-amber-200 flex items-center justify-center text-stone-700 text-xs font-bold shrink-0 select-none">
-                      ♔
+                    <div className="w-7 h-7 rounded-full bg-[#fef3c7] border-2 border-[#fcd34d] flex items-center justify-center text-[#44403c] text-[10px] font-mono font-bold shrink-0">
+                      W
                     </div>
                   </div>
 
                   {/* Result / separator */}
-                  <div className="shrink-0 w-24 flex justify-center">
+                  <div className="shrink-0 w-16 sm:w-24 flex justify-center">
                     {isBye ? (
-                      <span className="text-xs bg-secondary/80 px-2.5 py-1 rounded-md font-mono text-muted-foreground">
+                      <span className="text-xs bg-secondary/80 px-2 py-1 rounded-md font-mono text-muted-foreground">
                         BYE
                       </span>
                     ) : currentRound.status === "active" ? (
@@ -173,7 +173,7 @@ export function RoundManager({ tournament }: { tournament: Tournament }) {
                           updateResult(tournament.id, currentRound.number, pairing.id, v as GameResult)
                         }
                       >
-                        <SelectTrigger className="w-24 h-8 text-xs">
+                        <SelectTrigger className="w-full h-8 text-xs">
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
@@ -190,16 +190,16 @@ export function RoundManager({ tournament }: { tournament: Tournament }) {
                   </div>
 
                   {/* Black player */}
-                  <div className="flex-1 flex items-center gap-2.5 min-w-0">
-                    <div className="w-7 h-7 rounded-full bg-zinc-900 border-2 border-zinc-700 flex items-center justify-center text-zinc-300 text-xs font-bold shrink-0 select-none">
-                      ♚
+                  <div className="flex-1 flex items-center gap-1 sm:gap-2.5 min-w-0">
+                    <div className="w-7 h-7 rounded-full bg-ink-900 border-2 border-ink-700 flex items-center justify-center text-ink-300 text-[10px] font-mono font-bold shrink-0">
+                      B
                     </div>
                     <div className="min-w-0">
                       <div className={`text-sm font-medium truncate ${blackWins ? "text-primary" : ""}`}>
                         {isBye ? <span className="text-muted-foreground/40 italic">—</span> : (black?.name ?? "?")}
                       </div>
                       {!isBye && (
-                        <div className="text-xs text-muted-foreground font-mono">
+                        <div className="hidden sm:block text-xs text-muted-foreground font-mono">
                           {black?.rating} · {black?.score}p
                         </div>
                       )}
@@ -233,12 +233,12 @@ export function RoundManager({ tournament }: { tournament: Tournament }) {
                   const whitePlayer = getPlayer(tournament, p.whiteId);
                   const blackPlayer = getPlayer(tournament, p.blackId);
                   return (
-                    <div key={p.id} className="flex items-center gap-2 px-4 py-2 text-xs">
-                      <span className="w-5 text-center text-muted-foreground/40 font-mono">{p.board}</span>
+                    <div key={p.id} className="flex items-center gap-1 sm:gap-2 px-2 sm:px-4 py-2 text-xs">
+                      <span className="hidden sm:inline w-5 text-center text-muted-foreground/40 font-mono">{p.board}</span>
                       <span className={`flex-1 text-right truncate ${p.result === "1-0" ? "font-semibold text-primary" : "text-muted-foreground"}`}>
                         {whitePlayer?.name ?? "?"}
                       </span>
-                      <span className="w-14 text-center font-mono bg-secondary/50 rounded px-1 py-0.5 text-muted-foreground shrink-0">
+                      <span className="w-10 sm:w-14 text-center font-mono bg-secondary/50 rounded px-1 py-0.5 text-muted-foreground shrink-0">
                         {p.result === "1/2-1/2" ? "½-½" : p.result}
                       </span>
                       <span className={`flex-1 truncate ${p.result === "0-1" ? "font-semibold text-primary" : "text-muted-foreground"}`}>

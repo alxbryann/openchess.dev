@@ -1,0 +1,9 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="openchess knight mark">
+  
+  <path d="M24.5 13.5c1.6 2.2 3.7 3.4 6.2 4.1 4.6 1.3 8.6 3.6 11.4 7.6 2.7 3.9 3.9 8.6 3.9 14.2V46H20.5v-3.7c0-2.1.8-3.6 2.4-5.1 1.9-1.8 3.1-3.2 3.1-4.9 0-1.1-.5-1.9-1.5-2.4l-3.2 4.1c-.7.9-1.7 1.4-2.9 1.4-1.7 0-3-1-3.6-2.6-.5-1.5-.2-3 .9-4.4l5.7-7.2c-.9.2-1.8.5-2.6 1-.9.5-1.9.4-2.6-.3-.8-.8-.9-2-.2-3l4.1-5.3c.9-1.2 2.2-1.9 3.7-1.9h.7z" fill="currentColor"></path>
+  
+  <rect x="17" y="48" width="30" height="4.5" rx="1" fill="currentColor"></rect>
+  <rect x="14.5" y="54" width="35" height="4.5" rx="1.5" fill="currentColor"></rect>
+  
+  <circle cx="26.2" cy="22.5" r="1.7" fill="var(--paper, #FBFBF8)"></circle>
+</svg>

@@ -7,16 +7,13 @@ import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Trash2 } from "lucide-react";
 import { toast } from "sonner";
+import { cn } from "@/lib/utils";
 
 const AVATAR_PALETTE = [
-  "from-violet-500/25 to-violet-600/15 border-violet-500/25 text-violet-300",
-  "from-sky-500/25 to-sky-600/15 border-sky-500/25 text-sky-300",
-  "from-emerald-500/25 to-emerald-600/15 border-emerald-500/25 text-emerald-300",
-  "from-rose-500/25 to-rose-600/15 border-rose-500/25 text-rose-300",
-  "from-amber-500/25 to-amber-600/15 border-amber-500/25 text-amber-300",
-  "from-cyan-500/25 to-cyan-600/15 border-cyan-500/25 text-cyan-300",
-  "from-fuchsia-500/25 to-fuchsia-600/15 border-fuchsia-500/25 text-fuchsia-300",
-  "from-teal-500/25 to-teal-600/15 border-teal-500/25 text-teal-300",
+  "bg-brand-tint text-brand-text border-[color-mix(in_srgb,var(--brand)_25%,transparent)]",
+  "bg-surface-sunk text-ink-700 border-line-strong",
+  "bg-[color-mix(in_srgb,var(--info)_12%,white)] text-[var(--info)] border-[color-mix(in_srgb,var(--info)_25%,transparent)]",
+  "bg-[color-mix(in_srgb,var(--gold)_12%,white)] text-[#7c5e1e] border-[color-mix(in_srgb,var(--gold)_25%,transparent)]",
 ];
 
 function initials(name: string) {
@@ -41,16 +38,17 @@ export function PlayerList({ tournament }: { tournament: Tournament }) {
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <div>
-          <h3 className="font-semibold text-sm">Jugadores inscritos</h3>
-          <p className="text-xs text-muted-foreground mt-0.5">
-            {tournament.players.length} participante{tournament.players.length !== 1 ? "s" : ""}
+          <h3 className="font-semibold text-sm text-ink-900">Jugadores inscritos</h3>
+          <p className="text-xs text-ink-500 mt-0.5">
+            {tournament.players.length} participante
+            {tournament.players.length !== 1 ? "s" : ""}
           </p>
         </div>
         {canEdit && <AddPlayerDialog tournamentId={tournament.id} />}
       </div>
 
       {tournament.players.length === 0 ? (
-        <div className="text-center py-14 text-muted-foreground text-sm">
+        <div className="text-center py-14 text-ink-500 text-sm">
           No hay jugadores inscritos todavía.
         </div>
       ) : (
@@ -61,51 +59,59 @@ export function PlayerList({ tournament }: { tournament: Tournament }) {
               return (
                 <div
                   key={player.id}
-                  className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-secondary/40 transition-colors group"
+                  className="flex items-center gap-3 px-3 py-2.5 rounded-[var(--radius-md)] hover:bg-surface-sunk transition-colors group"
                 >
-                  {/* Avatar */}
                   <div
-                    className={`w-8 h-8 rounded-full bg-gradient-to-br border flex items-center justify-center text-xs font-bold shrink-0 ${avatarCls}`}
+                    className={cn(
+                      "w-8 h-8 rounded-full border flex items-center justify-center text-xs font-bold shrink-0",
+                      avatarCls
+                    )}
                   >
                     {initials(player.name)}
                   </div>
 
-                  {/* Info */}
                   <div className="flex-1 min-w-0">
-                    <div className="font-medium text-sm truncate">{player.name}</div>
-                    <div className="text-xs text-muted-foreground flex items-center gap-1.5">
+                    <div className="font-medium text-sm truncate text-ink-900">
+                      {player.name}
+                    </div>
+                    <div className="text-xs text-ink-500 flex items-center gap-1.5">
                       <span className="font-mono">{player.rating}</span>
                       {tournament.status !== "setup" && (
                         <>
-                          <span className="text-muted-foreground/30">·</span>
-                          <span className="text-primary font-semibold">{player.score} pts</span>
+                          <span className="text-ink-300">·</span>
+                          <span className="text-brand-text font-semibold">
+                            {player.score} pts
+                          </span>
                         </>
                       )}
                     </div>
                   </div>
 
-                  {/* Color history as piece glyphs */}
-                  {tournament.status !== "setup" && player.colorHistory.length > 0 && (
-                    <div className="flex gap-0.5 shrink-0">
-                      {player.colorHistory.slice(-5).map((c, i) => (
-                        <span
-                          key={i}
-                          title={c === "white" ? "Blancas" : "Negras"}
-                          className={`text-sm leading-none select-none ${
-                            c === "white" ? "text-amber-200/70" : "text-zinc-500/70"
-                          }`}
-                        >
-                          {c === "white" ? "♔" : "♚"}
-                        </span>
-                      ))}
-                    </div>
-                  )}
+                  {tournament.status !== "setup" &&
+                    player.colorHistory.length > 0 && (
+                      <div className="flex gap-1 shrink-0">
+                        {player.colorHistory.slice(-5).map((c, i) => (
+                          <span
+                            key={i}
+                            title={c === "white" ? "Blancas" : "Negras"}
+                            className={cn(
+                              "text-[10px] font-mono font-bold w-5 h-5 rounded flex items-center justify-center border",
+                              c === "white"
+                                ? "bg-[#fef3c7] border-[#fcd34d] text-[#44403c]"
+                                : "bg-ink-900 border-ink-700 text-ink-300"
+                            )}
+                          >
+                            {c === "white" ? "W" : "B"}
+                          </span>
+                        ))}
+                      </div>
+                    )}
 
                   {canEdit && (
                     <Button
-                      size="icon"
+                      size="icon-sm"
                       variant="ghost"
-                      className="h-7 w-7 opacity-0 group-hover:opacity-100 text-destructive hover:text-destructive hover:bg-destructive/10 transition-all"
+                      className="opacity-0 group-hover:opacity-100 text-destructive hover:text-destructive hover:bg-danger-bg transition-all"
                       onClick={() => {
                         removePlayer(tournament.id, player.id);
                         toast.success(`${player.name} eliminado`);
