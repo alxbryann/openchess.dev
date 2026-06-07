@@ -1,0 +1,278 @@
+{
+  "version": "1.0.0",
+  "lastScanned": 1780793547997,
+  "projectRoot": "/Users/bryanriano/Desktop/Projects/chess-tournaments",
+  "techStack": {
+    "languages": [
+      {
+        "name": "JavaScript/TypeScript",
+        "version": null,
+        "confidence": "high",
+        "markers": [
+          "package.json"
+        ]
+      },
+      {
+        "name": "TypeScript",
+        "version": null,
+        "confidence": "high",
+        "markers": [
+          "tsconfig.json"
+        ]
+      }
+    ],
+    "frameworks": [
+      {
+        "name": "next",
+        "version": "16.2.6",
+        "category": "fullstack"
+      },
+      {
+        "name": "react",
+        "version": "19.2.4",
+        "category": "frontend"
+      },
+      {
+        "name": "react-dom",
+        "version": "19.2.4",
+        "category": "frontend"
+      }
+    ],
+    "packageManager": "npm",
+    "runtime": null
+  },
+  "build": {
+    "buildCommand": "npm run build",
+    "testCommand": null,
+    "lintCommand": "npm run lint",
+    "devCommand": "npm run dev",
+    "scripts": {
+      "dev": "next dev",
+      "build": "next build",
+      "start": "next start",
+      "lint": "eslint"
+    }
+  },
+  "conventions": {
+    "namingStyle": "camelCase",
+    "importStyle": "ES modules",
+    "testPattern": null,
+    "fileOrganization": null
+  },
+  "structure": {
+    "isMonorepo": false,
+    "workspaces": [],
+    "mainDirectories": [
+      "app",
+      "components",
+      "lib",
+      "public"
+    ],
+    "gitBranches": null
+  },
+  "customNotes": [],
+  "directoryMap": {
+    "app": {
+      "path": "app",
+      "purpose": "Application code",
+      "fileCount": 5,
+      "lastAccessed": 1780793547985,
+      "keyFiles": [
+        "favicon.ico",
+        "globals.css",
+        "layout.tsx",
+        "page.tsx"
+      ]
+    },
+    "components": {
+      "path": "components",
+      "purpose": "UI components",
+      "fileCount": 6,
+      "lastAccessed": 1780793547985,
+      "keyFiles": [
+        "AddPlayerDialog.tsx",
+        "CreateTournamentDialog.tsx",
+        "PlayerList.tsx",
+        "RoundManager.tsx",
+        "StandingsTable.tsx"
+      ]
+    },
+    "lib": {
+      "path": "lib",
+      "purpose": "Library code",
+      "fileCount": 3,
+      "lastAccessed": 1780793547985,
+      "keyFiles": [
+        "store.ts",
+        "types.ts",
+        "utils.ts"
+      ]
+    },
+    "public": {
+      "path": "public",
+      "purpose": "Public files",
+      "fileCount": 5,
+      "lastAccessed": 1780793547987,
+      "keyFiles": [
+        "file.svg",
+        "globe.svg",
+        "next.svg",
+        "vercel.svg",
+        "window.svg"
+      ]
+    }
+  },
+  "hotPaths": [
+    {
+      "path": "lib/store.ts",
+      "accessCount": 2,
+      "lastAccessed": 1780793877192,
+      "type": "file"
+    },
+    {
+      "path": "lib/types.ts",
+      "accessCount": 2,
+      "lastAccessed": 1780793878122,
+      "type": "file"
+    },
+    {
+      "path": "app/page.tsx",
+      "accessCount": 2,
+      "lastAccessed": 1780793878483,
+      "type": "file"
+    },
+    {
+      "path": "app/play/[code]/page.tsx",
+      "accessCount": 2,
+      "lastAccessed": 1780793878744,
+      "type": "file"
+    },
+    {
+      "path": "app/dashboard/page.tsx",
+      "accessCount": 2,
+      "lastAccessed": 1780793883470,
+      "type": "file"
+    },
+    {
+      "path": "app/layout.tsx",
+      "accessCount": 2,
+      "lastAccessed": 1780793884419,
+      "type": "file"
+    },
+    {
+      "path": "components/CreateTournamentDialog.tsx",
+      "accessCount": 2,
+      "lastAccessed": 1780793884624,
+      "type": "file"
+    },
+    {
+      "path": "app/tournaments/[id]/page.tsx",
+      "accessCount": 2,
+      "lastAccessed": 1780793910350,
+      "type": "file"
+    },
+    {
+      "path": "app/tournaments/[id]/display/page.tsx",
+      "accessCount": 2,
+      "lastAccessed": 1780793910782,
+      "type": "file"
+    },
+    {
+      "path": "supabase/migrations/20260607011038_init.sql",
+      "accessCount": 2,
+      "lastAccessed": 1780794673447,
+      "type": "file"
+    },
+    {
+      "path": "package.json",
+      "accessCount": 1,
+      "lastAccessed": 1780793780147,
+      "type": "file"
+    },
+    {
+      "path": "components/RoundManager.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1780793786585,
+      "type": "file"
+    },
+    {
+      "path": "components/AddPlayerDialog.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1780793786705,
+      "type": "file"
+    },
+    {
+      "path": "components/PlayerList.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1780793789380,
+      "type": "file"
+    },
+    {
+      "path": "components/StandingsTable.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1780793789560,
+      "type": "file"
+    },
+    {
+      "path": "components/TournamentCard.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1780793789800,
+      "type": "file"
+    },
+    {
+      "path": "lib/pairing/swiss.ts",
+      "accessCount": 1,
+      "lastAccessed": 1780793793072,
+      "type": "file"
+    },
+    {
+      "path": "lib/pairing/roundrobin.ts",
+      "accessCount": 1,
+      "lastAccessed": 1780793793481,
+      "type": "file"
+    },
+    {
+      "path": "lib/pairing/elimination.ts",
+      "accessCount": 1,
+      "lastAccessed": 1780793793698,
+      "type": "file"
+    },
+    {
+      "path": "lib/utils.ts",
+      "accessCount": 1,
+      "lastAccessed": 1780793798153,
+      "type": "file"
+    },
+    {
+      "path": "tsconfig.json",
+      "accessCount": 1,
+      "lastAccessed": 1780793800390,
+      "type": "file"
+    },
+    {
+      "path": "next.config.ts",
+      "accessCount": 1,
+      "lastAccessed": 1780793800560,
+      "type": "file"
+    },
+    {
+      "path": ".env.local",
+      "accessCount": 1,
+      "lastAccessed": 1780794683240,
+      "type": "file"
+    },
+    {
+      "path": "lib/supabase/client.ts",
+      "accessCount": 1,
+      "lastAccessed": 1780794820302,
+      "type": "file"
+    },
+    {
+      "path": "lib/supabase/server.ts",
+      "accessCount": 1,
+      "lastAccessed": 1780794826591,
+      "type": "file"
+    }
+  ],
+  "userDirectives": []
+}
