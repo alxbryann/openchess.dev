@@ -21,6 +21,8 @@ export default function JoinPage() {
   const router = useRouter();
   const upsertLocal = useTournamentStore(s => s.upsertLocal);
   const formRef = useRef<HTMLFormElement>(null);
+  const navTimerRef = useRef<number | null>(null);
+  const navigatingRef = useRef(false);
   const [code, setCode] = useState("");
   const [name, setName] = useState("");
   const [rating, setRating] = useState("");
@@ -33,11 +35,15 @@ export default function JoinPage() {
     if (fromUrl) {
       setCode(fromUrl.toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 6));
     }
+    return () => {
+      if (navTimerRef.current) window.clearTimeout(navTimerRef.current);
+    };
   }, []);
 
   function closeStatus() {
     setStatus({ open: false });
-    setLoading(false);
+    // Keep loading=true if we're about to navigate so the button stays disabled
+    if (!navigatingRef.current) setLoading(false);
   }
 
   async function handleSubmit(e: React.FormEvent) {
@@ -114,7 +120,8 @@ export default function JoinPage() {
       tournamentName: t.name,
     });
 
-    window.setTimeout(() => {
+    navigatingRef.current = true;
+    navTimerRef.current = window.setTimeout(() => {
       router.push(`/play/${t.shareCode}?p=${encodeURIComponent(playerId)}`);
     }, 900);
   }

@@ -124,6 +124,12 @@
   },
   "hotPaths": [
     {
+      "path": "app/tournaments/[id]/display/page.tsx",
+      "accessCount": 25,
+      "lastAccessed": 1780853097022,
+      "type": "file"
+    },
+    {
       "path": "app/play/[code]/page.tsx",
       "accessCount": 19,
       "lastAccessed": 1780847366912,
@@ -136,9 +142,9 @@
       "type": "file"
     },
     {
-      "path": "app/tournaments/[id]/display/page.tsx",
+      "path": "app/dashboard/page.tsx",
       "accessCount": 10,
-      "lastAccessed": 1780837373695,
+      "lastAccessed": 1780852706107,
       "type": "file"
     },
     {
@@ -148,15 +154,21 @@
       "type": "file"
     },
     {
-      "path": "app/dashboard/page.tsx",
-      "accessCount": 9,
-      "lastAccessed": 1780837255545,
-      "type": "file"
-    },
-    {
       "path": "app/tournaments/[id]/page.tsx",
       "accessCount": 9,
       "lastAccessed": 1780837353008,
+      "type": "file"
+    },
+    {
+      "path": "app/globals.css",
+      "accessCount": 9,
+      "lastAccessed": 1780852605323,
+      "type": "file"
+    },
+    {
+      "path": "components/TournamentCard.tsx",
+      "accessCount": 9,
+      "lastAccessed": 1780853009344,
       "type": "file"
     },
     {
@@ -166,21 +178,15 @@
       "type": "file"
     },
     {
-      "path": "components/TournamentCard.tsx",
+      "path": "app/join/page.tsx",
       "accessCount": 8,
-      "lastAccessed": 1780836438897,
-      "type": "file"
-    },
-    {
-      "path": "app/globals.css",
-      "accessCount": 8,
-      "lastAccessed": 1780837850678,
+      "lastAccessed": 1780850539252,
       "type": "file"
     },
     {
       "path": "components/StandingsTable.tsx",
-      "accessCount": 7,
-      "lastAccessed": 1780836432598,
+      "accessCount": 8,
+      "lastAccessed": 1780853009676,
       "type": "file"
     },
     {
@@ -193,12 +199,6 @@
       "path": "components/PlayerList.tsx",
       "accessCount": 6,
       "lastAccessed": 1780836433123,
-      "type": "file"
-    },
-    {
-      "path": "app/join/page.tsx",
-      "accessCount": 4,
-      "lastAccessed": 1780847362579,
       "type": "file"
     },
     {
@@ -247,6 +247,12 @@
       "path": "components/JoinStatusDialog.tsx",
       "accessCount": 2,
       "lastAccessed": 1780848344270,
+      "type": "file"
+    },
+    {
+      "path": ".claude/launch.json",
+      "accessCount": 2,
+      "lastAccessed": 1780853160990,
       "type": "file"
     },
     {
@@ -361,6 +367,30 @@
       "path": "lib/hooks.ts",
       "accessCount": 1,
       "lastAccessed": 1780847651425,
+      "type": "file"
+    },
+    {
+      "path": "lib/auth.ts",
+      "accessCount": 1,
+      "lastAccessed": 1780851644056,
+      "type": "file"
+    },
+    {
+      "path": "components/oc/Button.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1780852615762,
+      "type": "file"
+    },
+    {
+      "path": "components/oc/Card.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1780852616769,
+      "type": "file"
+    },
+    {
+      "path": "components/oc/Badge.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1780852618204,
       "type": "file"
     }
   ],

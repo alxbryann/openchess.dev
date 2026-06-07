@@ -1,0 +1,7 @@
+{
+  "tool_name": "mcp__Claude_Preview__preview_eval",
+  "tool_input_preview": "{\"serverId\":\"72bab37c-0acb-4972-8f1a-8760dde5f8c7\",\"expression\":\"\\nconst res = await fetch('https://uulhztxwbrwxipkhishs.supabase.co/rest/v1/tournaments?select=id,name,status&limit=5', {\\n  headers: {...",
+  "error": "Eval failed: SyntaxError: await is only valid in async functions and the top level bodies of modules",
+  "timestamp": "2026-06-07T17:28:05.942Z",
+  "retry_count": 1
+}
