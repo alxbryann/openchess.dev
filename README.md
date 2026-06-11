@@ -1,36 +1,153 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<div align="center">
 
-## Getting Started
+# ♞ openchess<span>.dev</span>
 
-First, run the development server:
+### Corre un torneo de ajedrez en dos clicks.
+
+Plataforma **open-source** para crear y gestionar torneos de ajedrez.
+Emparejamientos suizos, eliminatorias, round robin o arena en segundos — los jugadores
+entran desde cualquier dispositivo con un **código de seis caracteres**. Sin cuentas, sin fricción.
+
+<br />
+
+[![MIT License](https://img.shields.io/badge/license-MIT-0E7343.svg?style=flat-square)](LICENSE)
+[![Next.js](https://img.shields.io/badge/Next.js-16-15171A.svg?style=flat-square&logo=next.js)](https://nextjs.org)
+[![React](https://img.shields.io/badge/React-19-087EA4.svg?style=flat-square&logo=react)](https://react.dev)
+[![Supabase](https://img.shields.io/badge/Supabase-Postgres%20%2B%20Realtime-3FCF8E.svg?style=flat-square&logo=supabase)](https://supabase.com)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6.svg?style=flat-square&logo=typescript)](https://www.typescriptlang.org)
+
+[**Crear torneo**](https://openchess.dev) · [Unirse con un código](https://openchess.dev/join) · [Reportar un bug](https://github.com/alxbryann/openchess.dev/issues)
+
+</div>
+
+---
+
+## ✨ Qué hace
+
+- **🏆 Cuatro formatos** — Suizo, Eliminación (simple/doble), Round Robin y Arena, con emparejamientos según convenciones FIDE.
+- **🔗 Únete con un código** — Cada torneo tiene un código corto. Échalo en un chat grupal o proyéctalo en la pared; los jugadores solo lo escriben. Sin registro obligatorio.
+- **⚡ Tablas en tiempo real** — Emparejamientos, resultados y clasificaciones se actualizan en el instante en que se reporta una partida, vía Supabase Realtime.
+- **⚖️ Justo por defecto** — Desempates automáticos (Buchholz, Sonneborn–Berger), manejo de byes y balance de colores listos desde el primer minuto.
+- **📺 Modo display** — Vista de pantalla completa para proyectar clasificaciones y emparejamientos en vivo en el club.
+- **🌍 Abierto y auto-hosteable** — Núcleo con licencia MIT. Córrelo en nuestra nube o en tu propio servidor: tus datos, tus reglas.
+
+## 🎯 Formatos soportados
+
+| Formato | Descripción | Ideal para |
+| --- | --- | --- |
+| **Suizo** | Todos juegan cada ronda; se emparejan por puntaje. | Campos abiertos grandes |
+| **Eliminación** | Brackets de eliminación simple o doble. | Knockouts y finales |
+| **Round Robin** | Todos contra todos. | Secciones pequeñas |
+| **Arena** | Emparejamiento continuo contra el reloj. | Blitz y eventos rápidos |
+
+## 🛠️ Stack
+
+| Capa | Tecnología |
+| --- | --- |
+| **Framework** | [Next.js 16](https://nextjs.org) (App Router) · [React 19](https://react.dev) |
+| **Lenguaje** | [TypeScript 5](https://www.typescriptlang.org) |
+| **Estilos** | [Tailwind CSS v4](https://tailwindcss.com) · [shadcn/ui](https://ui.shadcn.com) · [Base UI](https://base-ui.com) |
+| **Estado** | [Zustand](https://zustand-demo.pmnd.rs) |
+| **Backend** | [Supabase](https://supabase.com) — Postgres, Auth y Realtime |
+| **UI extra** | [lucide-react](https://lucide.dev) · [sonner](https://sonner.emilkowal.ski) · [date-fns](https://date-fns.org) |
+
+## 🚀 Empezar
+
+### Requisitos
+
+- **Node.js 20+** y **npm**
+- Un proyecto de **[Supabase](https://supabase.com)** (gratis) — o la [Supabase CLI](https://supabase.com/docs/guides/local-development) para correr el stack en local.
+
+### 1. Clonar e instalar
+
+```bash
+git clone https://github.com/alxbryann/openchess.dev.git
+cd openchess.dev
+npm install
+```
+
+### 2. Variables de entorno
+
+Crea un archivo `.env.local` en la raíz con las claves de tu proyecto de Supabase:
+
+```bash
+NEXT_PUBLIC_SUPABASE_URL=https://tu-proyecto.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=tu-anon-key
+```
+
+> Las encuentras en tu dashboard de Supabase → **Project Settings → API**.
+
+### 3. Base de datos
+
+Aplica la migración inicial (crea la tabla `tournaments`, las políticas RLS y la función `join_tournament`):
+
+```bash
+supabase db push
+```
+
+O copia el contenido de [`supabase/migrations/20260607011038_init.sql`](supabase/migrations/20260607011038_init.sql) en el **SQL Editor** de Supabase y ejecútalo.
+
+### 4. Levantar el dev server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abre [http://localhost:3000](http://localhost:3000) 🎉
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📜 Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Comando | Qué hace |
+| --- | --- |
+| `npm run dev` | Servidor de desarrollo con hot-reload |
+| `npm run build` | Build de producción |
+| `npm run start` | Sirve el build de producción |
+| `npm run lint` | Linter (ESLint) |
 
-## Learn More
+## 🗂️ Estructura del proyecto
 
-To learn more about Next.js, take a look at the following resources:
+```
+openchess.dev/
+├── app/                      # App Router (rutas y páginas)
+│   ├── page.tsx              # Landing
+│   ├── dashboard/            # "Mis torneos"
+│   ├── join/                 # Unirse con un código
+│   ├── tournaments/[id]/     # Vista del torneo + modo display
+│   ├── play/[code]/          # Vista del jugador
+│   └── auth/callback/        # Callback de auth de Supabase
+├── components/               # Componentes de UI (dialogs, tablas, listas…)
+│   ├── ui/                   # Primitivas shadcn/ui
+│   └── oc/                   # Componentes propios (marca, code input…)
+├── lib/
+│   ├── pairing/              # Algoritmos: swiss · roundrobin · elimination
+│   ├── supabase/             # Clientes server/client
+│   ├── store.ts              # Estado global (Zustand)
+│   └── types.ts              # Modelos de dominio (Tournament, Player, Round…)
+└── supabase/migrations/      # Esquema de la base de datos
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🚢 Deploy
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+La forma más fácil es [Vercel](https://vercel.com/new): importa el repo, agrega las dos variables de entorno de Supabase y despliega. También puedes auto-hostear con cualquier proveedor que corra Next.js (Docker, Node, etc.).
 
-## Deploy on Vercel
+## 🤝 Contribuir
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Las contribuciones son bienvenidas. Abre un [issue](https://github.com/alxbryann/openchess.dev/issues) para discutir un cambio grande, o manda un PR directo para fixes pequeños.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+# Flujo típico
+git checkout -b feat/mi-mejora
+# … haz tus cambios …
+npm run lint
+git commit -m "feat: describe tu cambio"
+git push origin feat/mi-mejora
+```
+
+## 📄 Licencia
+
+Distribuido bajo la **licencia MIT**. Consulta [`LICENSE`](LICENSE) para más detalles.
+
+<div align="center">
+<br />
+<sub>Hecho para el tablero. ♟️ · © 2026 openchess.dev</sub>
+</div>
